@@ -1,0 +1,1418 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-dark: #0f172a;
+  --bg-panel: #1e293b;
+  --bg-hover: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #8b5cf6;
+  --accent-hover: #2563eb;
+  
+  --traffic-low: #10b981;
+  --traffic-medium: #f59e0b;
+  --traffic-high: #ef4444;
+  
+  --border-color: #334155;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Navbar */
+.top-navbar {
+  height: 64px;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-section h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Main Layout: Sidebar + Map */
+.main-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 400px;
+  background-color: var(--bg-panel);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar-section {
+  padding: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-section h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Map Container */
+.map-container {
+  flex-grow: 1;
+  height: 100%;
+  position: relative;
+}
+
+/* Autocomplete Input */
+.autocomplete-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.input-field {
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 12px 16px;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.input-field:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: var(--bg-hover);
+}
+
+.dropdown-main-text {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.dropdown-sub-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Buttons */
+.btn {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.btn:hover {
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+/* Route Info */
+.route-info {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg-dark);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.info-value {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.traffic-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.traffic-low { background: rgba(16, 185, 129, 0.2); color: var(--traffic-low); border: 1px solid var(--traffic-low); }
+.traffic-medium { background: rgba(245, 158, 11, 0.2); color: var(--traffic-medium); border: 1px solid var(--traffic-medium); }
+.traffic-high { background: rgba(239, 68, 68, 0.2); color: var(--traffic-high); border: 1px solid var(--traffic-high); }
+
+/* Alerts */
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alert-card {
+  padding: 16px;
+  background: var(--bg-dark);
+  border-left: 4px solid var(--traffic-high);
+  border-radius: 8px;
+}
+
+.alert-card h3 {
+  color: #fca5a5;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.alert-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-confirm { background: rgba(16, 185, 129, 0.1); color: var(--traffic-low); border: 1px solid var(--traffic-low); cursor: pointer; transition: all 0.2s; }
+.btn-confirm:hover { background: var(--traffic-low); color: white; }
+
+.btn-reject { background: rgba(239, 68, 68, 0.1); color: var(--traffic-high); border: 1px solid var(--traffic-high); cursor: pointer; transition: all 0.2s; }
+.btn-reject:hover { background: var(--traffic-high); color: white; }
+
+.empty-state {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 20px 0;
+  font-style: italic;
+}
+
+/* Report Action Button */
+.report-fab {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: white;
+  border: none;
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.report-fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.5);
+}
+
+/* Overriding Leaflet Controls */
+.leaflet-control-container .leaflet-routing-container {
+  display: none !important;
+}
+/* Append these styles to the end of index.css */
+.route-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.route-steps-container {
+  background: var(--bg-dark);
+  border-radius: 8px;
+  padding: 16px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.route-step-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.route-step-item:last-child {
+  border-bottom: none;
+}
+
+.step-instruction {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.step-distance {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Additional UI Polish Styles */
+
+.btn-live-location {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--traffic-low);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-live-location:hover {
+  background: var(--traffic-low);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Glassmorphism Enhancements */
+.sidebar {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+}
+
+.top-navbar {
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.input-field {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.dropdown-menu {
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.route-info, .route-steps-container, .alert-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alert-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Hospital Button inside Alerts */
+.btn-hospital {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 12px;
+  transition: all 0.2s;
+}
+
+.btn-hospital:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.hospital-list {
+  margin-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 12px;
+}
+
+.hospital-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 0.85rem;
+}
+
+.hospital-name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.hospital-distance {
+  color: var(--text-secondary);
+}
+
+/* Journey Intelligence Card */
+.journey-intelligence-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  margin-bottom: 16px;
+  animation: slideDown 0.4s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card-title {
+  font-size: 1rem;
+  color: #60a5fa;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.intelligence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.intel-item {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.intel-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.intel-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Pulsing Map Markers */
+.leaflet-marker-icon {
+  transition: transform 0.3s ease;
+}
+
+.leaflet-marker-icon:hover {
+  transform: scale(1.1) !important;
+}
+
+/* Custom Popup Styling */
+.custom-popup .leaflet-popup-content-wrapper {
+  background: rgba(15, 23, 42, 0.95);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.custom-popup strong {
+  color: #60a5fa;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+/* Ambulance Mode Styles */
+.ambulance-btn {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.ambulance-btn:hover {
+  background: rgba(239, 68, 68, 0.8);
+  color: white;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+}
+
+.ambulance-theme {
+  background: #0f172a;
+}
+
+.ambulance-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 64px);
+  padding: 24px;
+}
+
+.broadcast-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.broadcast-icon-container {
+  margin-bottom: 24px;
+}
+
+.broadcast-pulse {
+  animation: radarPulse 1.5s infinite;
+}
+
+@keyframes radarPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0.7)); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.9)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0)); }
+}
+
+.broadcast-card h2 {
+  color: #f8fafc;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+.broadcast-card p {
+  color: #94a3b8;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.btn-broadcast {
+  background: #334155;
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.btn-broadcast:hover {
+  background: #475569;
+}
+
+.btn-broadcast.active {
+  background: #ef4444;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+  animation: sirenFlash 1s infinite alternate;
+}
+
+@keyframes sirenFlash {
+  from { background: #ef4444; }
+  to { background: #b91c1c; }
+}
+
+.live-status {
+  margin-top: 24px;
+  color: #10b981;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1s infinite;
+}
+
+/* Civilian Ambulance Warning Overlay */
+.ambulance-warning-overlay {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 90%;
+  max-width: 600px;
+  background: rgba(220, 38, 38, 0.95);
+  border: 2px solid #f87171;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.6);
+  backdrop-filter: blur(8px);
+  animation: slideDown 0.3s ease-out, massiveFlash 0.5s infinite alternate;
+}
+
+@keyframes massiveFlash {
+  from { box-shadow: 0 0 20px rgba(239, 68, 68, 0.8); background: rgba(220, 38, 38, 0.95); }
+  to { box-shadow: 0 0 60px rgba(239, 68, 68, 1); background: rgba(185, 28, 28, 0.98); }
+}
+
+.ambulance-warning-content {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.warning-pulse-icon {
+  animation: radarPulse 1s infinite;
+}
+
+.distance-text {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.ambulance-warning-content p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Global Alert Banner */
+.global-alert-banner {
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+  padding: 8px 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+  position: relative;
+  z-index: 50;
+  border-bottom: 2px solid #f87171;
+}
+
+.marquee {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee span {
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  padding-right: 100vw;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Ambulance Dispatch UI */
+.ambulance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+@media (max-width: 768px) {
+  .ambulance-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dispatch-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.dispatch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dispatch-item {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 8px;
+  padding: 16px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.dispatch-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.dispatch-badge {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.dispatch-time {
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.dispatch-body {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.btn-route-dispatch {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-route-dispatch:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Interactive Hospital Items */
+.hospital-item.interactive {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hospital-item.interactive:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-left: 3px solid #3b82f6;
+  transform: translateX(4px);
+}
+
+/* Dispatch Modal */
+.dispatch-modal-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.dispatch-modal {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-emergency-dispatch {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-emergency-dispatch:hover {
+  background: #dc2626;
+  transform: scale(1.02);
+}
+
+.btn-book-ride {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.btn-book-ride:hover {
+  background: #d97706;
+  transform: scale(1.02);
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #475569;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Booking Page */
+.booking-theme {
+  background: #0f172a;
+}
+
+.booking-main {
+  height: calc(100vh - 64px);
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.booking-main.centered {
+  align-items: center;
+}
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.booking-map-preview {
+  background: url('https://cdn.pixabay.com/photo/2019/11/12/15/47/map-4621432_1280.png') center/cover;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+}
+
+.route-summary {
+  position: absolute;
+  top: 24px; left: 24px;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+}
+
+.route-point {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.route-point.dest {
+  color: #ef4444;
+}
+
+.route-point span {
+  color: #f8fafc;
+}
+
+.route-line {
+  width: 2px;
+  height: 30px;
+  background: #475569;
+  margin-left: 9px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.route-meta {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.booking-panel {
+  background: rgba(30, 41, 59, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-panel h2 {
+  color: #f8fafc;
+  margin-bottom: 24px;
+}
+
+.rides-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.ride-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 2px solid transparent;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ride-item:hover {
+  background: rgba(0,0,0,0.4);
+}
+
+.ride-item.selected {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.ride-icon {
+  font-size: 2rem;
+}
+
+.ride-details {
+  flex: 1;
+}
+
+.ride-details h3 {
+  color: #f8fafc;
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.capacity {
+  font-size: 0.75rem;
+  background: #475569;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.ride-details p {
+  color: #94a3b8;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.ride-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #f8fafc;
+}
+
+.btn-confirm-ride {
+  background: #f8fafc;
+  color: #0f172a;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-confirm-ride:hover:not(.disabled) {
+  background: #cbd5e1;
+}
+
+.btn-confirm-ride.disabled {
+  background: #475569;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Success Card */
+.success-card {
+  background: rgba(30, 41, 59, 0.95);
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #10b981;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.2);
+}
+
+.success-card h1 {
+  color: #10b981;
+  margin-bottom: 16px;
+}
+
+.success-card p {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.driver-details {
+  background: rgba(0,0,0,0.3);
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.driver-avatar {
+  font-size: 2.5rem;
+  background: #475569;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-back {
+  background: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-back:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Booking Page & Dispatch Modal Styles */
+.booking-page-container {
+  min-height: 100vh;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.booking-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.booking-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 32px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.vehicle-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.vehicle-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.vehicle-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.vehicle-item.active {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+.vehicle-icon {
+  margin-right: 16px;
+  color: #3b82f6;
+}
+
+.vehicle-info {
+  flex: 1;
+}
+
+.vehicle-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.vehicle-meta {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  display: flex;
+  gap: 8px;
+}
+
+.vehicle-price {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #f8fafc;
+}
+
+.btn-confirm-booking {
+  width: 100%;
+  padding: 16px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-confirm-booking:hover:not(.disabled) {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.btn-confirm-booking.disabled {
+  background: #334155;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.dispatch-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.dispatch-modal {
+  background: #1e293b;
+  padding: 32px;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 90%;
+  border: 1px solid #ef4444;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-emergency {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-booking {
+  background: #334155;
+  color: white;
+  border: 1px solid #475569;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-close-modal {
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  margin-top: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+  width: 100%;
+}
+
+.success-card {
+  background: #1e293b;
+  padding: 48px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  border: 1px solid #10b981;
+}
+
+.driver-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 16px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+}
+
+.driver-avatar {
+  width: 48px;
+  height: 48px;
+  background: #3b82f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.driver-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hospital-item.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hospital-item.clickable:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateX(5px);
+}
+
+.close-banner { background: transparent; border: none; color: white; font-size: 1.5rem; cursor: pointer; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-weight: bold; }
+.nav-actions { display: flex; align-items: center; gap: 16px; } .btn-reset { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #94a3b8; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; } .btn-reset:hover { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5); }
